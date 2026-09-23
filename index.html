@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasil 22 — Informação política em um só lugar</title>
+<meta name="description" content="Acompanhe rapidamente as principais informações políticas do Brasil e receba alertas de novas atualizações diretamente no seu celular.">
+<meta name="theme-color" content="#041443">
+<meta property="og:title" content="Brasil 22 — Informação política em um só lugar">
+<meta property="og:description" content="Notícias em tempo real sobre Câmara, Congresso e política nacional, com alertas no celular.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23041443'/%3E%3Crect x='8' y='10' width='6' height='44' rx='2' fill='%2300B85C'/%3E%3Ctext x='38' y='45' font-family='Arial Black,Arial' font-weight='900' font-size='30' text-anchor='middle' fill='%23FFD400'%3E22%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --green:#00B85C;
+  --green-neon:#19F28A;
+  --green-deep:#006B3A;
+  --yellow:#FFD400;
+  --yellow-soft:#FFE766;
+  --blue:#0B34B8;
+  --blue-deep:#041443;
+  --blue-night:#020A26;
+  --red:#E5162E;
+  --ink:#05070D;
+  --ink-2:#0C111C;
+  --paper:#F3F5F9;
+  --white:#FFFFFF;
+  --text:#0B1224;
+  --muted:#4A5570;
+  --line:#DDE2EC;
+  --radius:22px;
+  --shadow-sm:0 2px 8px rgba(4,20,67,.06),0 1px 2px rgba(4,20,67,.06);
+  --shadow:0 24px 60px -24px rgba(4,20,67,.35),0 8px 20px -10px rgba(4,20,67,.18);
+  --font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --wrap:1240px;
+  --header-h:76px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;z-index:200;background:var(--yellow);color:var(--ink);padding:10px 16px;border-radius:10px;font-weight:800}
+.skip:focus{top:12px}
+
+/* ---------- Tipografia ---------- */
+.display{font-weight:900;font-stretch:76%;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;margin:0}
+.kicker{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:28px;height:3px;background:linear-gradient(90deg,var(--green) 0 50%,var(--yellow) 50% 100%);border-radius:2px}
+.section{padding:120px 0;position:relative}
+.section-head{max-width:860px;margin:0 auto 64px;text-align:center}
+.section-head .kicker{color:var(--green-deep);margin-bottom:18px}
+.section-head h2{font-size:clamp(2.1rem,5vw,4rem)}
+.section-head p{font-size:1.15rem;color:var(--muted);margin:22px auto 0;max-width:680px}
+
+/* ---------- Botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;border:0;border-radius:14px;font-weight:900;font-stretch:92%;text-transform:uppercase;letter-spacing:.02em;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none;transition:transform .2s ease}
+.btn:hover svg{transform:translateX(4px)}
+.btn-primary{background:var(--yellow);color:var(--ink);padding:22px 34px;font-size:1.12rem;box-shadow:0 0 0 0 rgba(255,212,0,.6),0 18px 40px -12px rgba(255,212,0,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 0 6px rgba(255,212,0,.18),0 24px 50px -12px rgba(255,212,0,.65)}
+.btn-green{background:var(--green);color:var(--white);padding:22px 34px;font-size:1.12rem;box-shadow:0 18px 40px -14px rgba(0,184,92,.7)}
+.btn-green:hover{transform:translateY(-2px);background:#00C864}
+.btn-sm{padding:12px 18px;font-size:.86rem;border-radius:11px}
+.btn-pulse{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,212,0,.55),0 18px 40px -12px rgba(255,212,0,.55)}50%{box-shadow:0 0 0 14px rgba(255,212,0,0),0 18px 40px -12px rgba(255,212,0,.55)}}
+
+/* ---------- Tarjas ---------- */
+.tag-live{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.12em;padding:9px 14px 9px 12px;border-radius:8px;text-transform:uppercase;box-shadow:0 10px 30px -10px rgba(229,22,46,.8)}
+.dot{width:9px;height:9px;border-radius:50%;background:#fff;position:relative;flex:none}
+.dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #fff;animation:ping 1.6s ease-out infinite}
+.dot-red{background:var(--red)}
+.dot-red::after{border-color:var(--red)}
+@keyframes ping{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.6);opacity:0}}
+
+/* ---------- Logo ---------- */
+.logo{display:inline-flex;align-items:center;gap:12px;line-height:1}
+.logo-mark{display:flex;align-items:stretch;gap:8px}
+.logo-bar{width:6px;border-radius:3px;background:linear-gradient(180deg,var(--green) 0 50%,var(--yellow) 50% 100%)}
+.logo-text{display:flex;flex-direction:column;justify-content:center}
+.logo-text b{font-weight:900;font-stretch:82%;font-size:1.02rem;letter-spacing:.14em;color:#fff}
+.logo-text strong{font-weight:900;font-stretch:78%;font-size:2.05rem;letter-spacing:-.02em;color:var(--yellow);line-height:.82;margin-top:2px}
+.logo-tag{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.16em;color:rgba(255,255,255,.62);padding-left:14px;border-left:1px solid rgba(255,255,255,.18);white-space:nowrap}
+
+/* ---------- Header ---------- */
+.flagline{height:4px;background:linear-gradient(90deg,var(--green) 0 40%,var(--yellow) 40% 70%,var(--blue) 70% 100%)}
+.header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s ease,box-shadow .3s ease,backdrop-filter .3s ease}
+.header.scrolled{background:rgba(2,10,38,.82);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+.header-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:var(--header-h)}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{color:rgba(255,255,255,.82);font-weight:700;font-size:.9rem;padding:9px 11px;border-radius:9px;transition:color .2s,background .2s;white-space:nowrap}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.header-cta{display:flex;align-items:center;gap:12px}
+.menu-btn{display:none;width:46px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;align-items:center;justify-content:center}
+.menu-btn svg{width:22px;height:22px}
+.drawer{position:fixed;inset:0;z-index:150;background:rgba(2,10,38,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;padding:24px;transform:translateY(-100%);transition:transform .4s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.drawer nav{display:flex;flex-direction:column}
+.drawer nav a{color:#fff;font-weight:900;font-stretch:84%;text-transform:uppercase;font-size:1.7rem;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.drawer nav a span{font-family:var(--mono);font-size:.75rem;color:var(--yellow);font-weight:700}
+.drawer .btn{margin-top:28px;width:100%}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;color:#fff;background:
+  radial-gradient(900px 600px at 85% 20%,rgba(0,184,92,.28),transparent 60%),
+  radial-gradient(700px 500px at 10% 90%,rgba(11,52,184,.55),transparent 60%),
+  radial-gradient(500px 400px at 60% 110%,rgba(255,212,0,.16),transparent 60%),
+  linear-gradient(160deg,#061a5a 0%,var(--blue-deep) 45%,var(--blue-night) 100%);
+  padding:calc(var(--header-h) + 76px) 0 110px}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 40%,transparent 100%);pointer-events:none}
+.hero-scan{position:absolute;left:0;right:0;height:180px;background:linear-gradient(180deg,transparent,rgba(25,242,138,.06),transparent);animation:scan 7s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-200px}100%{top:100%}}
+.hero-in{position:relative;display:grid;grid-template-columns:1.18fr .82fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5.6rem);margin:26px 0 0}
+.hero h1 .hl{position:relative;display:inline;color:var(--ink);background:linear-gradient(transparent 8%,var(--yellow) 8%,var(--yellow) 92%,transparent 92%);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:0 .12em}
+.hero-sub{font-size:clamp(1.08rem,1.5vw,1.3rem);color:rgba(255,255,255,.82);max-width:620px;margin:28px 0 36px}
+.hero-sub strong{color:#fff}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.micro{display:inline-flex;align-items:center;gap:9px;font-size:.92rem;color:rgba(255,255,255,.68)}
+.micro svg{width:17px;height:17px;color:var(--green-neon)}
+
+/* Painel do hero */
+.panel{position:relative;border-radius:26px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12)}
+.panel-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.panel-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;font-weight:700;color:rgba(255,255,255,.75)}
+.panel-clock{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--yellow);display:flex;gap:8px;align-items:center}
+.panel-row{display:flex;align-items:center;gap:14px;padding:14px;border-radius:16px;background:rgba(2,10,38,.35);border:1px solid rgba(255,255,255,.06);margin-top:10px}
+.panel-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none}
+.panel-ico svg{width:22px;height:22px}
+.panel-row h4{margin:0;font-size:.98rem;font-weight:800;font-stretch:92%;text-transform:uppercase;letter-spacing:.02em}
+.panel-row p{margin:2px 0 0;font-size:.8rem;color:rgba(255,255,255,.6)}
+.panel-row .grow{flex:1;min-width:0}
+.panel-status{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green-neon);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.panel-status i{width:7px;height:7px;border-radius:50%;background:var(--green-neon);box-shadow:0 0 10px var(--green-neon);animation:blink 1.4s ease-in-out infinite}
+.panel-row:nth-child(3) .panel-status i{animation-delay:.3s}
+.panel-row:nth-child(4) .panel-status i{animation-delay:.6s}
+.panel-row:nth-child(5) .panel-status i{animation-delay:.9s}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.bars{display:flex;gap:3px;align-items:flex-end;height:22px;margin-top:8px}
+.bars span{width:4px;border-radius:2px;background:linear-gradient(180deg,var(--yellow),var(--green));animation:eq 1.2s ease-in-out infinite}
+.bars span:nth-child(2){animation-delay:.15s}.bars span:nth-child(3){animation-delay:.3s}.bars span:nth-child(4){animation-delay:.45s}.bars span:nth-child(5){animation-delay:.6s}.bars span:nth-child(6){animation-delay:.75s}
+@keyframes eq{0%,100%{height:30%}50%{height:100%}}
+.toast{position:absolute;left:-44px;bottom:-58px;display:flex;align-items:center;gap:12px;background:#fff;color:var(--text);border-radius:18px;padding:14px 18px 14px 14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);max-width:320px;animation:toastIn 6s ease-in-out infinite}
+.toast .t-ico{width:40px;height:40px;border-radius:12px;background:var(--blue-deep);display:grid;place-items:center;flex:none}
+.toast .t-ico svg{width:20px;height:20px;color:var(--yellow)}
+.toast b{display:block;font-size:.72rem;font-family:var(--mono);letter-spacing:.08em;color:var(--green-deep)}
+.toast span{font-size:.9rem;font-weight:700;line-height:1.3}
+@keyframes toastIn{0%,8%{opacity:0;transform:translateY(16px) scale(.96)}14%,86%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(-8px) scale(.98)}}
+.hero-lower{position:absolute;left:0;right:0;bottom:0;height:10px;background:linear-gradient(90deg,var(--green) 0 33%,var(--yellow) 33% 66%,var(--blue) 66% 100%)}
+
+/* ---------- Ticker ---------- */
+.ticker{display:flex;align-items:stretch;background:var(--ink);color:#fff;border-top:1px solid rgba(255,255,255,.06);border-bottom:3px solid var(--yellow);overflow:hidden;position:relative;z-index:2}
+.ticker-badge{flex:none;display:flex;align-items:center;gap:10px;background:var(--red);padding:0 22px;font-family:var(--mono);font-weight:700;letter-spacing:.14em;font-size:.86rem;position:relative;z-index:2;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);padding-right:34px}
+.ticker-view{flex:1;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.ticker-track{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-group{display:flex;align-items:center;flex:none}
+.ticker-item{display:flex;align-items:center;gap:22px;padding:18px 22px;font-weight:900;font-stretch:86%;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.ticker-item::after{content:"";width:9px;height:9px;background:var(--yellow);transform:rotate(45deg);margin-left:22px}
+.ticker-item.accent{color:var(--yellow)}
+.ticker-item.green{color:var(--green-neon)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- Vídeo ---------- */
+.video-sec{background:var(--white);overflow:hidden}
+.video-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 360px at 50% 0,rgba(0,184,92,.08),transparent 70%);pointer-events:none}
+.player-frame{position:relative;max-width:1040px;margin:0 auto;padding:6px;border-radius:32px;background:linear-gradient(135deg,var(--green),var(--yellow) 50%,var(--green));box-shadow:0 60px 120px -40px rgba(4,20,67,.55),0 20px 40px -20px rgba(0,107,58,.35)}
+.player{position:relative;aspect-ratio:16/9;border-radius:27px;overflow:hidden;background:
+  radial-gradient(600px 300px at 80% 20%,rgba(0,184,92,.35),transparent 70%),
+  radial-gradient(500px 300px at 10% 100%,rgba(11,52,184,.6),transparent 70%),
+  linear-gradient(160deg,#0a2372,var(--blue-night));
+  color:#fff;cursor:pointer;display:block;width:100%;border:0;padding:0;text-align:left}
+.player-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px}
+.player-watermark{position:absolute;right:5%;top:50%;transform:translateY(-50%);font-weight:900;font-stretch:72%;font-size:clamp(5rem,20vw,15rem);line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.09);letter-spacing:-.03em;user-select:none}
+.player-tag{position:absolute;top:22px;left:22px;display:flex;gap:8px;align-items:center}
+.player-tag .assista{background:var(--yellow);color:var(--ink);font-family:var(--mono);font-weight:700;font-size:.75rem;letter-spacing:.14em;padding:8px 12px;border-radius:8px;display:flex;align-items:center;gap:8px}
+.player-tag .assista svg{width:14px;height:14px}
+.player-tag .hd{border:1px solid rgba(255,255,255,.3);font-family:var(--mono);font-size:.7rem;font-weight:700;padding:7px 9px;border-radius:8px;color:rgba(255,255,255,.8)}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(84px,12vw,128px);aspect-ratio:1;border-radius:50%;background:var(--yellow);display:grid;place-items:center;box-shadow:0 20px 50px -10px rgba(255,212,0,.6);transition:transform .25s ease}
+.play::before,.play::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--yellow);animation:ring 2.4s ease-out infinite}
+.play::after{animation-delay:1.2s}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.play svg{width:38%;height:38%;color:var(--ink);margin-left:8%}
+.player:hover .play{transform:translate(-50%,-50%) scale(1.07)}
+.lower-third{position:absolute;left:22px;right:22px;bottom:22px;display:flex;align-items:stretch;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.lower-third .lt-a{background:var(--green);padding:12px 16px;font-weight:900;font-stretch:86%;letter-spacing:.05em;font-size:clamp(.72rem,1.4vw,.95rem);text-transform:uppercase;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.lower-third .lt-b{flex:1;background:rgba(255,255,255,.95);color:var(--ink);padding:12px 16px;font-weight:800;font-size:clamp(.72rem,1.4vw,.95rem);display:flex;align-items:center;min-width:0}
+.lower-third .lt-b span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lower-third .lt-c{background:var(--yellow);color:var(--ink);padding:12px 14px;font-family:var(--mono);font-weight:700;font-size:.75rem;display:flex;align-items:center}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-note{position:absolute;inset:auto 0 50% 0;transform:translateY(calc(50% + 90px));text-align:center;font-family:var(--mono);font-size:.8rem;color:rgba(255,255,255,.85);opacity:0;transition:opacity .3s}
+.player.noted .player-note{opacity:1}
+.video-caption{text-align:center;max-width:640px;margin:36px auto 0;font-size:1.12rem;color:var(--muted)}
+
+/* ---------- Cards "o que você recebe" ---------- */
+.receive{background:var(--paper)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{position:relative;background:var(--white);border-radius:var(--radius);padding:30px 26px 30px;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--accent,var(--green))}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.card-ico{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:var(--accent-bg,rgba(0,184,92,.12));color:var(--accent-ink,var(--green-deep));margin-bottom:22px}
+.card-ico svg{width:30px;height:30px}
+.card .label{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.card h3{font-weight:900;font-stretch:86%;text-transform:uppercase;font-size:1.42rem;line-height:1.05;margin:8px 0 12px}
+.card p{margin:0;color:var(--muted);font-size:.98rem}
+.card.c-yellow{--accent:var(--yellow);--accent-bg:rgba(255,212,0,.2);--accent-ink:#8a6d00}
+.card.c-blue{--accent:var(--blue);--accent-bg:rgba(11,52,184,.1);--accent-ink:var(--blue)}
+.card.c-red{--accent:var(--red);--accent-bg:rgba(229,22,46,.1);--accent-ink:var(--red)}
+.card-foot{margin-top:22px;padding-top:16px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--green-deep)}
+
+/* ---------- Como funciona ---------- */
+.how{background:var(--white)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;counter-reset:s}
+.steps::before{content:"";position:absolute;left:12%;right:12%;top:70px;height:3px;background:repeating-linear-gradient(90deg,var(--green) 0 14px,transparent 14px 26px);opacity:.5}
+.step{position:relative;text-align:center;padding:0 12px}
+.step-num{width:140px;height:140px;margin:0 auto 28px;border-radius:50%;display:grid;place-items:center;background:var(--white);position:relative;box-shadow:var(--shadow)}
+.step-num::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(var(--green) 0 33%,var(--yellow) 0 66%,var(--blue) 0);z-index:-1}
+.step-num::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--white)}
+.step-num span{position:relative;z-index:1;font-weight:900;font-stretch:78%;font-size:3.6rem;line-height:1;background:linear-gradient(160deg,var(--blue-deep),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.step-num em{position:absolute;z-index:2;right:-2px;bottom:6px;width:46px;height:46px;border-radius:14px;background:var(--yellow);display:grid;place-items:center;box-shadow:0 10px 20px -8px rgba(0,0,0,.35)}
+.step-num em svg{width:24px;height:24px;color:var(--ink)}
+.step h3{font-weight:900;font-stretch:86%;font-size:1.7rem;text-transform:uppercase;margin:0 0 10px}
+.step p{margin:0 auto;color:var(--muted);max-width:300px;font-size:1.05rem}
+
+/* ---------- Benefícios (escuro/neon) ---------- */
+.benefits{background:radial-gradient(800px 400px at 15% 0,rgba(25,242,138,.12),transparent 60%),radial-gradient(700px 400px at 90% 100%,rgba(255,212,0,.1),transparent 60%),var(--ink);color:#fff;overflow:hidden}
+.benefits .section-head .kicker{color:var(--green-neon)}
+.benefits .section-head p{color:rgba(255,255,255,.65)}
+.benefits h2 .neon{color:var(--yellow);text-shadow:0 0 22px rgba(255,212,0,.55),0 0 60px rgba(255,212,0,.25)}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.benefit{position:relative;display:flex;align-items:center;gap:18px;padding:26px 24px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.09);transition:border-color .3s,transform .3s,box-shadow .3s}
+.benefit:hover{border-color:rgba(25,242,138,.55);transform:translateY(-4px);box-shadow:0 0 0 1px rgba(25,242,138,.2),0 20px 50px -20px rgba(25,242,138,.45)}
+.benefit:nth-child(even):hover{border-color:rgba(255,212,0,.55);box-shadow:0 0 0 1px rgba(255,212,0,.2),0 20px 50px -20px rgba(255,212,0,.4)}
+.check{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;border:1.5px solid var(--green-neon);color:var(--green-neon);box-shadow:0 0 18px rgba(25,242,138,.35),inset 0 0 12px rgba(25,242,138,.2)}
+.benefit:nth-child(even) .check{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 18px rgba(255,212,0,.35),inset 0 0 12px rgba(255,212,0,.2)}
+.check svg{width:24px;height:24px}
+.benefit h3{margin:0;font-size:1.15rem;font-weight:800;line-height:1.25}
+
+/* ---------- Destaque ---------- */
+.spotlight{background:var(--yellow);color:var(--ink);overflow:hidden;padding:130px 0}
+.spotlight::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.035) 0 2px,transparent 2px 22px)}
+.spot-urgent{position:absolute;top:0;left:0;right:0;display:flex;overflow:hidden;background:var(--ink);color:var(--yellow)}
+.spot-urgent .ticker-track{animation-duration:26s}
+.spot-urgent .ticker-item{padding:10px 18px;font-size:.85rem}
+.spot-urgent .ticker-item::after{background:var(--red)}
+.spot-in{position:relative;display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:end}
+.spotlight h2{font-size:clamp(2.8rem,8vw,7.2rem);line-height:.9}
+.spotlight h2 span{display:block}
+.spotlight h2 .outline{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.spot-side p{font-size:1.18rem;font-weight:500;margin:0 0 28px}
+.spot-side .btn{background:var(--ink);color:#fff;padding:22px 30px;font-size:1.05rem;box-shadow:0 20px 40px -16px rgba(0,0,0,.5)}
+.spot-side .btn:hover{transform:translateY(-2px);background:var(--blue-deep)}
+.spot-side .btn svg{color:var(--yellow)}
+
+/* ---------- Mockup ---------- */
+.app-sec{background:radial-gradient(900px 500px at 50% 110%,rgba(255,212,0,.22),transparent 60%),linear-gradient(160deg,#00864A 0%,#005A3A 30%,var(--blue-deep) 75%,var(--blue-night) 100%);color:#fff;overflow:hidden}
+.app-sec .section-head .kicker{color:var(--yellow)}
+.app-sec .section-head p{color:rgba(255,255,255,.75)}
+.phones{position:relative;display:flex;justify-content:center;align-items:center;perspective:1800px;min-height:640px}
+.phone{position:relative;width:292px;aspect-ratio:9/19;border-radius:48px;padding:11px;background:linear-gradient(145deg,#2a2f3a,#0b0e14 50%,#1c212b);box-shadow:0 60px 100px -30px rgba(0,0,0,.7),inset 0 0 0 2px rgba(255,255,255,.08),0 0 0 1px rgba(0,0,0,.4);flex:none;transform-style:preserve-3d}
+.phone::before{content:"";position:absolute;right:-3px;top:130px;width:3px;height:70px;border-radius:0 3px 3px 0;background:#2a2f3a}
+.screen{position:relative;height:100%;border-radius:38px;overflow:hidden;background:#fff;color:var(--text)}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#000;z-index:5}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:13px 24px 0;font-size:.72rem;font-weight:800;height:40px}
+.statusbar i{display:flex;gap:4px;align-items:center}
+.statusbar i b{display:block;width:16px;height:9px;border-radius:2px;border:1.5px solid currentColor;position:relative}
+.statusbar i b::after{content:"";position:absolute;inset:1px 3px 1px 1px;background:currentColor;border-radius:1px}
+.phone-center{z-index:3;animation:float 6s ease-in-out infinite}
+.phone-left{z-index:2;transform:translateX(70px) rotateY(24deg) scale(.88);animation:floatL 7s ease-in-out infinite}
+.phone-right{z-index:2;transform:translateX(-70px) rotateY(-24deg) scale(.88);animation:floatR 7s ease-in-out infinite .6s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes floatL{0%,100%{transform:translateX(70px) rotateY(24deg) scale(.88) translateY(0)}50%{transform:translateX(70px) rotateY(24deg) scale(.88) translateY(-10px)}}
+@keyframes floatR{0%,100%{transform:translateX(-70px) rotateY(-24deg) scale(.88) translateY(0)}50%{transform:translateX(-70px) rotateY(-24deg) scale(.88) translateY(-10px)}}
+
+/* Tela do app */
+.app-head{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 12px;background:var(--blue-deep);color:#fff;margin-top:-40px;padding-top:50px}
+.app-logo{display:flex;align-items:center;gap:7px;line-height:1}
+.app-logo .logo-bar{width:4px;height:26px}
+.app-logo b{display:block;font-weight:900;font-stretch:82%;font-size:.62rem;letter-spacing:.14em}
+.app-logo strong{display:block;font-weight:900;font-stretch:78%;font-size:1.2rem;color:var(--yellow);line-height:.85}
+.app-bell{position:relative;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center}
+.app-bell svg{width:16px;height:16px}
+.app-bell::after{content:"";position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 2px var(--blue-deep)}
+.app-tabs{display:flex;gap:6px;padding:10px 14px;background:var(--blue-deep);overflow:hidden}
+.app-tabs span{font-size:.6rem;font-weight:800;padding:6px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);white-space:nowrap;letter-spacing:.04em}
+.app-tabs span.on{background:var(--yellow);color:var(--ink)}
+.app-body{padding:14px;background:#F2F4F8;height:100%}
+.app-hero{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(150deg,var(--green) 0%,#007A45 60%,var(--blue-deep) 130%);position:relative;overflow:hidden}
+.app-hero::after{content:"22";position:absolute;right:-6px;bottom:-22px;font-weight:900;font-stretch:72%;font-size:6rem;color:rgba(255,255,255,.1);line-height:1}
+.chip-now{display:inline-flex;align-items:center;gap:6px;background:var(--red);font-size:.58rem;font-weight:800;letter-spacing:.1em;padding:5px 8px;border-radius:6px;font-family:var(--mono)}
+.chip-now .dot{width:6px;height:6px}
+.chip-now .dot::after{inset:-3px;border-width:1.5px}
+.app-hero h5{margin:10px 0 4px;font-weight:900;font-stretch:88%;font-size:1.1rem;line-height:1.1;text-transform:uppercase;position:relative;z-index:1}
+.app-hero p{margin:0;font-size:.66rem;opacity:.8;position:relative;z-index:1}
+.app-list{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.app-item{display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.app-item .ai{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+.app-item .ai svg{width:18px;height:18px}
+.app-item small{display:block;font-family:var(--mono);font-size:.54rem;font-weight:700;letter-spacing:.1em}
+.app-item b{display:block;font-size:.76rem;line-height:1.2;margin-top:2px}
+.app-item em{font-style:normal;font-size:.56rem;color:var(--muted);margin-left:auto;align-self:flex-start;white-space:nowrap}
+.app-nav{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:space-around;background:#fff;border-radius:22px;padding:10px 0;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.app-nav span{width:22px;height:22px;display:grid;place-items:center;color:#9AA3B5}
+.app-nav span.on{color:var(--green)}
+.app-nav svg{width:20px;height:20px}
+
+/* Tela bloqueada */
+.lock{background:linear-gradient(170deg,#0B34B8 0%,var(--blue-deep) 45%,#00562F 100%);color:#fff;height:100%;position:relative}
+.lock::before{content:"";position:absolute;width:260px;height:260px;left:50%;top:48%;transform:translate(-50%,-50%) rotate(45deg);background:rgba(255,212,0,.12);border-radius:30px}
+.lock .statusbar{color:#fff}
+.lock-time{text-align:center;margin-top:34px;position:relative}
+.lock-time small{font-size:.72rem;font-weight:700;opacity:.8}
+.lock-time div{font-weight:800;font-stretch:90%;font-size:4.2rem;line-height:1;letter-spacing:-.02em}
+.notifs{position:absolute;left:10px;right:10px;bottom:30px;display:flex;flex-direction:column;gap:8px}
+.notif{display:flex;gap:10px;align-items:flex-start;padding:11px;border-radius:18px;background:rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18)}
+.notif .ni{width:32px;height:32px;border-radius:9px;background:var(--blue-deep);display:grid;place-items:center;flex:none;border:1px solid rgba(255,255,255,.2)}
+.notif .ni b{color:var(--yellow);font-weight:900;font-stretch:78%;font-size:.95rem}
+.notif .nt{flex:1;min-width:0}
+.notif .nt div{display:flex;justify-content:space-between;font-size:.58rem;font-weight:800;letter-spacing:.06em;opacity:.85}
+.notif .nt p{margin:3px 0 0;font-size:.72rem;font-weight:600;line-height:1.3}
+.notif.faded{opacity:.7;transform:scale(.96)}
+
+/* Tela de alertas */
+.alerts-head{padding:6px 18px 14px}
+.alerts-head small{font-family:var(--mono);font-size:.56rem;font-weight:700;letter-spacing:.12em;color:var(--green-deep)}
+.alerts-head h5{margin:4px 0 0;font-weight:900;font-stretch:86%;font-size:1.3rem;text-transform:uppercase;line-height:1}
+.toggle-list{padding:0 14px;display:flex;flex-direction:column;gap:8px}
+.toggle{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:#F2F4F8}
+.toggle .ai{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none}
+.toggle .ai svg{width:16px;height:16px}
+.toggle b{flex:1;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+.switch{width:36px;height:21px;border-radius:20px;background:var(--green);position:relative;flex:none}
+.switch::after{content:"";position:absolute;right:2px;top:2px;width:17px;height:17px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch.off{background:#C9CFDB}
+.switch.off::after{right:auto;left:2px}
+.alert-banner{margin:14px;padding:14px;border-radius:16px;background:var(--blue-deep);color:#fff;display:flex;gap:10px;align-items:center}
+.alert-banner .ni{width:34px;height:34px;border-radius:10px;background:var(--yellow);display:grid;place-items:center;flex:none;color:var(--ink)}
+.alert-banner .ni svg{width:18px;height:18px}
+.alert-banner p{margin:0;font-size:.7rem;font-weight:600;line-height:1.3}
+
+.float-notif{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);color:var(--text);padding:12px 16px 12px 12px;border-radius:16px;box-shadow:0 20px 50px -15px rgba(0,0,0,.5);font-weight:800;font-size:.86rem;animation:bob 5s ease-in-out infinite}
+.float-notif .fi{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none}
+.float-notif .fi svg{width:18px;height:18px}
+.fn-1{left:4%;top:18%}
+.fn-2{right:4%;top:62%;animation-delay:1.4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ---------- Credibilidade / portal ---------- */
+.portal{background:var(--white)}
+.masthead{border-top:6px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center;padding:14px 0;margin-bottom:0;gap:16px;flex-wrap:wrap}
+.masthead .mh-left{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.12em;color:var(--muted);display:flex;gap:10px;align-items:center}
+.masthead .mh-title{font-weight:900;font-stretch:80%;text-transform:uppercase;font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1;letter-spacing:-.01em;text-align:center;flex:1}
+.masthead .mh-right{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+.portal-tabs{display:flex;border-bottom:3px solid var(--ink);overflow-x:auto;scrollbar-width:none}
+.portal-tabs::-webkit-scrollbar{display:none}
+.portal-tabs span{padding:14px 20px;font-weight:900;font-stretch:86%;text-transform:uppercase;letter-spacing:.04em;font-size:.95rem;white-space:nowrap;border-right:1px solid var(--line)}
+.portal-tabs span:first-child{background:var(--ink);color:var(--yellow)}
+.portal-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:auto auto;border-left:1px solid var(--line)}
+.pcol{padding:30px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.pcol .ptag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;padding:6px 10px;border-radius:6px;margin-bottom:18px}
+.pcol h3{margin:0 0 12px;font-weight:900;font-stretch:84%;text-transform:uppercase;font-size:1.65rem;line-height:1.02}
+.pcol p{margin:0;color:var(--muted)}
+.pcol.wide{grid-column:span 2}
+.pcol.big{grid-row:span 2;background:linear-gradient(170deg,var(--blue-deep),#07226e);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:28px;overflow:hidden}
+.pcol.big h3{font-size:clamp(2rem,3.4vw,2.9rem)}
+.pcol.big p{color:rgba(255,255,255,.72);font-size:1.08rem}
+.pcol.big::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:40px;transform:rotate(45deg);background:linear-gradient(135deg,rgba(0,184,92,.5),rgba(255,212,0,.35));filter:blur(2px);opacity:.5}
+.feed-lines{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
+.feed-line{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08)}
+.feed-line i{font-style:normal;font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--yellow);letter-spacing:.08em;flex:none;width:92px}
+.feed-line span{height:8px;border-radius:4px;background:rgba(255,255,255,.22);flex:1}
+.feed-line span.s2{max-width:70%}
+.feed-line span.s3{max-width:52%}
+.principles{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:40px}
+.principle{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:40px;background:var(--paper);border:1px solid var(--line);font-weight:700;font-size:.95rem}
+.principle svg{width:18px;height:18px;color:var(--green)}
+
+/* ---------- FAQ ---------- */
+.faq{background:var(--paper)}
+.faq-list{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq details{background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow .3s,border-color .3s}
+.faq details[open]{box-shadow:var(--shadow);border-color:transparent}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;padding:24px 26px;font-weight:900;font-stretch:90%;font-size:1.2rem;text-transform:uppercase;letter-spacing:.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .qn{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--green-deep);flex:none}
+.faq summary .qi{margin-left:auto;width:38px;height:38px;border-radius:12px;background:var(--paper);display:grid;place-items:center;flex:none;transition:background .3s,transform .3s}
+.faq summary .qi svg{width:18px;height:18px;transition:transform .3s}
+.faq details[open] summary .qi{background:var(--yellow)}
+.faq details[open] summary .qi svg{transform:rotate(45deg)}
+.faq .ans{padding:0 26px 26px 72px;color:var(--muted);font-size:1.06rem}
+.faq .ans p{margin:0}
+
+/* ---------- CTA final ---------- */
+.final{position:relative;background:radial-gradient(700px 400px at 50% 0,rgba(0,184,92,.3),transparent 70%),linear-gradient(170deg,#06208a,var(--blue-deep) 50%,var(--blue-night));color:#fff;text-align:center;overflow:hidden;padding:140px 0}
+.final .shape{position:absolute;pointer-events:none}
+.final .rhombus{left:50%;top:50%;width:min(1100px,140vw);aspect-ratio:1.9;transform:translate(-50%,-50%);background:linear-gradient(135deg,rgba(0,184,92,.2),rgba(255,212,0,.14));clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.final .circle{left:50%;top:50%;width:min(420px,70vw);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:2px solid rgba(255,212,0,.25)}
+.final .stripe{height:10px;left:0;right:0;bottom:0;background:linear-gradient(90deg,var(--green) 0 50%,var(--yellow) 50% 100%)}
+.final-in{position:relative;max-width:900px;margin:0 auto}
+.final h2{font-size:clamp(2.6rem,7vw,6rem);margin:22px 0}
+.final h2 .y{color:var(--yellow)}
+.final p.lead{font-size:clamp(1.08rem,1.6vw,1.3rem);color:rgba(255,255,255,.82);max-width:680px;margin:0 auto 40px}
+.final .btn-primary{font-size:clamp(1.05rem,2vw,1.35rem);padding:26px 44px}
+.final .micro{margin-top:22px;justify-content:center;display:flex}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--ink);color:rgba(255,255,255,.7);padding:70px 0 36px}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-brand p{margin:14px 0 0;font-size:1.02rem;color:rgba(255,255,255,.75)}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-weight:700;color:#fff;transition:color .2s}
+.footer-links a:hover{color:var(--yellow)}
+.disclaimer{margin:28px 0 0;padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:.92rem;display:flex;gap:14px;align-items:flex-start}
+.disclaimer svg{width:20px;height:20px;flex:none;color:var(--yellow);margin-top:2px}
+.copy{margin-top:26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.45);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- Animações de entrada ---------- */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.08s}.js .reveal.d2{transition-delay:.16s}.js .reveal.d3{transition-delay:.24s}.js .reveal.d4{transition-delay:.32s}.js .reveal.d5{transition-delay:.4s}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:1240px){
+  .logo-tag{display:none}
+  .nav a{font-size:.84rem;padding:8px 8px}
+}
+@media (max-width:1100px){
+  .nav,.header-cta .btn{display:none}
+  .menu-btn{display:inline-flex}
+  .hero-in{grid-template-columns:1fr;gap:70px}
+  .panel{max-width:560px;margin-left:auto;margin-right:0}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .benefit-grid{grid-template-columns:repeat(2,1fr)}
+  .spot-in{grid-template-columns:1fr;gap:32px}
+  .portal-grid{grid-template-columns:1fr 1fr}
+  .pcol.big{grid-column:1 / -1;grid-row:auto}
+  .phone{width:260px}
+  .phones{min-height:580px}
+}
+@media (max-width:760px){
+  :root{--header-h:66px}
+  .wrap{padding:0 16px}
+  .section{padding:84px 0}
+  .section-head{margin-bottom:44px}
+  .section-head p{font-size:1.04rem}
+  .logo-text strong{font-size:1.7rem}
+  .logo-text b{font-size:.88rem}
+  .hero{padding:calc(var(--header-h) + 44px) 0 90px}
+  .hero h1{margin-top:20px}
+  .hero-actions .btn,.spot-side .btn,.final .btn-primary{width:100%;white-space:normal;text-align:center}
+  .btn-primary,.btn-green{padding:20px 22px}
+  .panel{margin:0 0 20px}
+  .toast{position:relative;left:auto;bottom:auto;margin-top:14px;max-width:none}
+  .ticker-badge{padding:0 24px 0 14px;font-size:.74rem}
+  .ticker-item{padding:14px 16px;font-size:.92rem;gap:16px}
+  .ticker-item::after{margin-left:16px}
+  .ticker-track{animation-duration:30s}
+  .player-frame{padding:4px;border-radius:22px}
+  .player{border-radius:19px}
+  .player-tag{top:12px;left:12px}
+  .player-tag .hd{display:none}
+  .lower-third{left:10px;right:10px;bottom:10px;border-radius:8px}
+  .lower-third .lt-a,.lower-third .lt-b{padding:8px 10px}
+  .lower-third .lt-c{display:none}
+  .cards{grid-template-columns:1fr;gap:16px}
+  .steps{grid-template-columns:1fr;gap:48px}
+  .steps::before{display:none}
+  .benefit-grid{grid-template-columns:1fr}
+  .spotlight{padding:110px 0 90px}
+  .spotlight h2 .outline{-webkit-text-stroke:1.5px var(--ink)}
+  .phones{min-height:560px}
+  .phone-left,.phone-right{display:none}
+  .phone-center{width:min(280px,78vw)}
+  .fn-1{display:none}
+  .fn-2{right:0;top:auto;bottom:2%}
+  .float-notif{font-size:.78rem}
+  .portal-grid{grid-template-columns:1fr}
+  .pcol.wide{grid-column:auto}
+  .pcol{padding:26px 20px}
+  .masthead{justify-content:center;text-align:center}
+  .masthead .mh-left,.masthead .mh-right{display:none}
+  .faq summary{padding:20px 18px;font-size:1.02rem;gap:12px}
+  .faq .ans{padding:0 18px 22px 18px}
+  .final{padding:100px 0}
+  .footer-top{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .ticker-track{animation:marquee 90s linear infinite!important}
+  .spot-urgent .ticker-track{animation:marquee 70s linear infinite!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ============ ÍCONES (sprite) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.52.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5Z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 10h16M12 3 3 8v2h18V8l-9-5ZM6 10v8M10 10v8M14 10v8M18 10v8M4 18h16"/></symbol>
+    <symbol id="i-congress" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 20h20M4 20v-5M20 20v-5M3 15a4 4 0 0 1 7 0M14 15a4 4 0 0 1 7 0M10 20V4M14 20V4M10 4h4"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5" fill="#00B85C"/><path d="M12 6.8 20 12l-8 5.2L4 12z" fill="#FFD400"/><circle cx="12" cy="12" r="3.3" fill="#0B34B8"/><path d="M8.9 11.3c2-.6 4.3-.3 6.1.9" stroke="#fff" stroke-width=".9" fill="none"/></symbol>
+    <symbol id="i-brasil" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2.5 22 12l-10 9.5L2 12z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 18h2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    <symbol id="i-toggle" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="12" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m12 2 10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="flagline"></div>
+  <div class="wrap header-in">
+    <a href="#inicio" class="logo" aria-label="Brasil 22 — início">
+      <span class="logo-mark"><span class="logo-bar"></span><span class="logo-text"><b>BRASIL</b><strong>22</strong></span></span>
+      <span class="logo-tag">INFORMAÇÃO • POLÍTICA • BRASIL</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#inicio">Início</a>
+      <a href="#ultimas">Últimas Notícias</a>
+      <a href="#politica">Política</a>
+      <a href="#camara">Câmara</a>
+      <a href="#congresso">Congresso</a>
+      <a href="#alertas">Alertas</a>
+      <a href="#como-funciona">Como Funciona</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#video" class="btn btn-primary btn-sm" data-cta>Conhecer o Brasil 22</a>
+      <button class="menu-btn" id="menuOpen" aria-label="Abrir menu" aria-controls="drawer" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <span class="logo"><span class="logo-mark"><span class="logo-bar"></span><span class="logo-text"><b>BRASIL</b><strong>22</strong></span></span></span>
+    <button class="menu-btn" style="display:inline-flex" id="menuClose" aria-label="Fechar menu"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <nav aria-label="Menu móvel">
+    <a href="#inicio">Início <span>01</span></a>
+    <a href="#ultimas">Últimas Notícias <span>02</span></a>
+    <a href="#politica">Política <span>03</span></a>
+    <a href="#camara">Câmara <span>04</span></a>
+    <a href="#congresso">Congresso <span>05</span></a>
+    <a href="#alertas">Alertas <span>06</span></a>
+    <a href="#como-funciona">Como Funciona <span>07</span></a>
+  </nav>
+  <a href="#video" class="btn btn-primary" data-cta>Conhecer o Brasil 22 <svg><use href="#i-arrow"/></svg></a>
+</div>
+
+<main id="conteudo">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="tag-live reveal"><span class="dot"></span>Notícias em tempo real</span>
+      <h1 class="display reveal d1">Você pode estar descobrindo as notícias políticas <span class="hl">tarde demais.</span></h1>
+      <p class="hero-sub reveal d2">Com o <strong>Brasil 22</strong>, acompanhe as principais informações políticas e receba novos acontecimentos diretamente no seu celular, sem precisar ficar horas procurando notícias.</p>
+      <div class="hero-actions reveal d3">
+        <a href="#video" class="btn btn-primary btn-pulse" data-cta>Quero acompanhar as notícias <svg><use href="#i-arrow"/></svg></a>
+        <span class="micro"><svg><use href="#i-shield"/></svg>Informações públicas reunidas em um único aplicativo.</span>
+      </div>
+    </div>
+
+    <div class="panel reveal d2" aria-label="Exemplo do painel do Brasil 22">
+      <div class="panel-top">
+        <span class="panel-title">BRASIL 22 · PAINEL</span>
+        <span class="panel-clock"><span class="dot dot-red"></span><span id="clock">BRASÍLIA --:--:--</span></span>
+      </div>
+      <div class="panel-row">
+        <div class="panel-ico" style="background:rgba(0,184,92,.2);color:var(--green-neon)"><svg><use href="#i-building"/></svg></div>
+        <div class="grow"><h4>Câmara dos Deputados</h4><p>Votações, projetos e pautas</p></div>
+        <span class="panel-status"><i></i>ATIVO</span>
+      </div>
+      <div class="panel-row">
+        <div class="panel-ico" style="background:rgba(255,212,0,.18);color:var(--yellow)"><svg><use href="#i-congress"/></svg></div>
+        <div class="grow"><h4>Congresso</h4><p>Atualizações do cenário nacional</p></div>
+        <span class="panel-status"><i></i>ATIVO</span>
+      </div>
+      <div class="panel-row">
+        <div class="panel-ico" style="background:rgba(255,255,255,.1)"><svg><use href="#i-flag"/></svg></div>
+        <div class="grow"><h4>Política Nacional</h4><p>Acontecimentos relevantes</p></div>
+        <span class="panel-status"><i></i>ATIVO</span>
+      </div>
+      <div class="panel-row">
+        <div class="panel-ico" style="background:rgba(229,22,46,.2);color:#ff6b7c"><svg><use href="#i-bell"/></svg></div>
+        <div class="grow"><h4>Alertas no celular</h4><div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+        <span class="panel-status"><i></i>LIGADO</span>
+      </div>
+      <div class="toast" aria-hidden="true">
+        <div class="t-ico"><svg><use href="#i-bell"/></svg></div>
+        <div><b>BRASIL 22 · AGORA</b><span>Você recebeu uma nova atualização.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-lower"></div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" role="marquee" aria-label="Ao vivo: últimas atualizações, Câmara, Congresso, Política Nacional, Brasil">
+  <div class="ticker-badge"><span class="dot"></span>AO VIVO</div>
+  <div class="ticker-view">
+    <div class="ticker-track" aria-hidden="true">
+      <div class="ticker-group">
+        <span class="ticker-item accent">Últimas atualizações</span>
+        <span class="ticker-item">Câmara</span>
+        <span class="ticker-item">Congresso</span>
+        <span class="ticker-item green">Política nacional</span>
+        <span class="ticker-item">Brasil</span>
+        <span class="ticker-item accent">Alertas no celular</span>
+        <span class="ticker-item">Informações públicas</span>
+        <span class="ticker-item green">Notícias em tempo real</span>
+      </div>
+      <div class="ticker-group">
+        <span class="ticker-item accent">Últimas atualizações</span>
+        <span class="ticker-item">Câmara</span>
+        <span class="ticker-item">Congresso</span>
+        <span class="ticker-item green">Política nacional</span>
+        <span class="ticker-item">Brasil</span>
+        <span class="ticker-item accent">Alertas no celular</span>
+        <span class="ticker-item">Informações públicas</span>
+        <span class="ticker-item green">Notícias em tempo real</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VÍDEO ============ -->
+<section class="section video-sec" id="video">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Apresentação</span>
+      <h2 class="display">Entenda o que está acontecendo no Brasil</h2>
+    </div>
+    <div class="player-frame reveal d1">
+      <button class="player" id="player" type="button" aria-label="Assistir ao vídeo de apresentação do Brasil 22">
+        <span class="player-grid"></span>
+        <span class="player-watermark">22</span>
+        <span class="player-tag"><span class="assista"><svg><use href="#i-play"/></svg>ASSISTA</span><span class="hd">HD</span></span>
+        <span class="play"><svg><use href="#i-play"/></svg></span>
+        <span class="player-note" id="playerNote">O vídeo de apresentação será publicado em breve.</span>
+        <span class="lower-third">
+          <span class="lt-a"><span class="dot"></span>Brasil 22</span>
+          <span class="lt-b"><span>Como funciona o aplicativo de notícias políticas</span></span>
+          <span class="lt-c">VÍDEO</span>
+        </span>
+      </button>
+    </div>
+    <p class="video-caption reveal d2">Veja como funciona o Brasil 22 e como você pode receber as principais atualizações diretamente no celular.</p>
+  </div>
+</section>
+
+<!-- ============ O QUE VOCÊ RECEBE ============ -->
+<section class="section receive" id="politica">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">O que você recebe</span>
+      <h2 class="display">Informação política, sem precisar ficar procurando.</h2>
+    </div>
+    <div class="cards">
+      <article class="card reveal d1" id="camara">
+        <div class="card-ico"><svg><use href="#i-building"/></svg></div>
+        <span class="label">EDITORIA 01</span>
+        <h3>Câmara dos Deputados</h3>
+        <p>Acompanhe notícias, votações, projetos e informações públicas relacionadas às atividades da Câmara dos Deputados.</p>
+        <div class="card-foot"><svg width="14" height="14"><use href="#i-check"/></svg>VOTAÇÕES • PROJETOS</div>
+      </article>
+      <article class="card c-yellow reveal d2" id="congresso">
+        <div class="card-ico"><svg><use href="#i-congress"/></svg></div>
+        <span class="label">EDITORIA 02</span>
+        <h3>Congresso</h3>
+        <p>Tenha acesso organizado às principais atualizações relacionadas ao cenário político nacional.</p>
+        <div class="card-foot"><svg width="14" height="14"><use href="#i-check"/></svg>ATUALIZAÇÕES ORGANIZADAS</div>
+      </article>
+      <article class="card c-blue reveal d3">
+        <div class="card-ico" style="background:rgba(11,52,184,.08)"><svg><use href="#i-flag"/></svg></div>
+        <span class="label">EDITORIA 03</span>
+        <h3>Política Nacional</h3>
+        <p>Acompanhe acontecimentos e notícias relevantes da política brasileira.</p>
+        <div class="card-foot"><svg width="14" height="14"><use href="#i-check"/></svg>CENÁRIO NACIONAL</div>
+      </article>
+      <article class="card c-red reveal d4">
+        <div class="card-ico"><svg><use href="#i-bell"/></svg></div>
+        <span class="label">RECURSO</span>
+        <h3>Alertas no celular</h3>
+        <p>Receba notificações quando novas informações relevantes forem publicadas.</p>
+        <div class="card-foot"><svg width="14" height="14"><use href="#i-check"/></svg>NOTIFICAÇÕES</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section class="section how" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Como funciona</span>
+      <h2 class="display">Você recebe. Você acompanha. Você decide.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal d1">
+        <div class="step-num"><span>01</span><em><svg><use href="#i-download"/></svg></em></div>
+        <h3>Baixe o app</h3>
+        <p>Tenha o Brasil 22 no seu celular.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num"><span>02</span><em><svg><use href="#i-toggle"/></svg></em></div>
+        <h3>Ative os alertas</h3>
+        <p>Escolha acompanhar as categorias que mais interessam.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num"><span>03</span><em><svg><use href="#i-bell"/></svg></em></div>
+        <h3>Receba as atualizações</h3>
+        <p>Quando novas notícias forem publicadas, você recebe uma notificação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFÍCIOS ============ -->
+<section class="section benefits" id="beneficios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Benefícios</span>
+      <h2 class="display">Chega de descobrir as notícias <span class="neon">horas depois.</span></h2>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit reveal d1"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Notícias políticas em um só lugar</h3></div>
+      <div class="benefit reveal d2"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Atualizações frequentes</h3></div>
+      <div class="benefit reveal d3"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Alertas diretamente no celular</h3></div>
+      <div class="benefit reveal d1"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Organização por categorias</h3></div>
+      <div class="benefit reveal d2"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Acompanhamento de informações públicas</h3></div>
+      <div class="benefit reveal d3"><span class="check"><svg><use href="#i-check"/></svg></span><h3>Interface rápida e simples</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESTAQUE ============ -->
+<section class="section spotlight">
+  <div class="spot-urgent" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-group"><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span></div>
+      <div class="ticker-group"><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span><span class="ticker-item">Urgente</span><span class="ticker-item">Brasil 22</span></div>
+    </div>
+  </div>
+  <div class="wrap spot-in">
+    <h2 class="display reveal"><span>Se aconteceu</span><span>na política,</span><span class="outline">você precisa</span><span>saber.</span></h2>
+    <div class="spot-side reveal d2">
+      <p>O Brasil 22 foi pensado para quem quer acompanhar de perto os acontecimentos da política brasileira sem depender de ficar procurando informações em diversos sites e redes sociais.</p>
+      <a href="#video" class="btn" data-cta>Conhecer o Brasil 22 <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOCKUP ============ -->
+<section class="section app-sec" id="alertas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">O aplicativo</span>
+      <h2 class="display">Tudo na palma da sua mão.</h2>
+      <p>Uma interface simples, organizada por categorias, com alertas que chegam direto na tela do seu celular.</p>
+    </div>
+
+    <div class="phones reveal d1" aria-label="Telas do aplicativo Brasil 22">
+      <div class="float-notif fn-1" aria-hidden="true"><span class="fi" style="background:var(--yellow);color:var(--ink)"><svg><use href="#i-bell"/></svg></span>Nova atualização</div>
+      <div class="float-notif fn-2" aria-hidden="true"><span class="fi" style="background:rgba(0,184,92,.15);color:var(--green-deep)"><svg><use href="#i-building"/></svg></span>Câmara · nova votação</div>
+
+      <!-- Tela bloqueada -->
+      <div class="phone phone-left" aria-hidden="true">
+        <div class="screen lock">
+          <div class="island"></div>
+          <div class="statusbar"><span>BR</span><i><b></b></i></div>
+          <div class="lock-time"><small>quarta-feira</small><div class="lock-clock">09:41</div></div>
+          <div class="notifs">
+            <div class="notif faded"><div class="ni"><b>22</b></div><div class="nt"><div><span>BRASIL 22</span><span>5 min</span></div><p>Principais acontecimentos do dia</p></div></div>
+            <div class="notif"><div class="ni"><b>22</b></div><div class="nt"><div><span>BRASIL 22</span><span>agora</span></div><p>🔔 Você recebeu uma nova atualização.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App principal -->
+      <div class="phone phone-center">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="statusbar" style="color:#fff;position:relative;z-index:2"><span class="lock-clock">09:41</span><i><b></b></i></div>
+          <div class="app-head">
+            <div class="app-logo"><span class="logo-bar"></span><div><b>BRASIL</b><strong>22</strong></div></div>
+            <div class="app-bell"><svg><use href="#i-bell"/></svg></div>
+          </div>
+          <div class="app-tabs"><span class="on">Tudo</span><span>Câmara</span><span>Congresso</span><span>Brasil</span></div>
+          <div class="app-body">
+            <div class="app-hero">
+              <span class="chip-now"><span class="dot"></span>AGORA</span>
+              <h5>Nova atualização política</h5>
+              <p>Toque para ver os detalhes e a fonte</p>
+            </div>
+            <div class="app-list">
+              <div class="app-item">
+                <span class="ai" style="background:rgba(0,184,92,.14);color:var(--green-deep)"><svg><use href="#i-building"/></svg></span>
+                <div><small style="color:var(--green-deep)">CÂMARA</small><b>Nova votação publicada</b></div><em>agora</em>
+              </div>
+              <div class="app-item">
+                <span class="ai" style="background:rgba(11,52,184,.08)"><svg><use href="#i-flag"/></svg></span>
+                <div><small style="color:var(--blue)">BRASIL</small><b>Principais acontecimentos do dia</b></div><em>hoje</em>
+              </div>
+              <div class="app-item">
+                <span class="ai" style="background:rgba(255,212,0,.25);color:#7a6000"><svg><use href="#i-bell"/></svg></span>
+                <div><small style="color:#7a6000">ALERTA</small><b>Você recebeu uma nova atualização.</b></div><em>novo</em>
+              </div>
+            </div>
+          </div>
+          <div class="app-nav"><span class="on"><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-search"/></svg></span><span><svg><use href="#i-bell"/></svg></span><span><svg><use href="#i-user"/></svg></span></div>
+        </div>
+      </div>
+
+      <!-- Tela de alertas -->
+      <div class="phone phone-right" aria-hidden="true">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="statusbar"><span class="lock-clock">09:41</span><i><b></b></i></div>
+          <div class="alerts-head"><small>CONFIGURAÇÕES</small><h5>Seus alertas</h5></div>
+          <div class="toggle-list">
+            <div class="toggle"><span class="ai" style="background:rgba(0,184,92,.14);color:var(--green-deep)"><svg><use href="#i-building"/></svg></span><b>Câmara</b><span class="switch"></span></div>
+            <div class="toggle"><span class="ai" style="background:rgba(255,212,0,.25);color:#7a6000"><svg><use href="#i-congress"/></svg></span><b>Congresso</b><span class="switch"></span></div>
+            <div class="toggle"><span class="ai" style="background:rgba(11,52,184,.08)"><svg><use href="#i-flag"/></svg></span><b>Política nacional</b><span class="switch"></span></div>
+            <div class="toggle"><span class="ai" style="background:rgba(229,22,46,.1);color:var(--red)"><svg><use href="#i-bolt"/></svg></span><b>Somente urgentes</b><span class="switch off"></span></div>
+          </div>
+          <div class="alert-banner"><span class="ni"><svg><use href="#i-bell"/></svg></span><p>Pronto! Você será avisado quando novas informações forem publicadas.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDIBILIDADE ============ -->
+<section class="section portal" id="ultimas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">A plataforma</span>
+      <h2 class="display">Uma nova forma de acompanhar a política.</h2>
+    </div>
+
+    <div class="reveal d1">
+      <div class="masthead">
+        <span class="mh-left"><span class="dot dot-red"></span><span id="dateline">EDIÇÃO DE HOJE</span></span>
+        <span class="mh-title">Brasil 22</span>
+        <span class="mh-right">INFORMAÇÃO • POLÍTICA</span>
+      </div>
+      <div class="portal-tabs" aria-hidden="true">
+        <span>Últimas atualizações</span><span>Informações públicas</span><span>Notícias</span><span>Alertas</span>
+      </div>
+      <div class="portal-grid">
+        <div class="pcol big">
+          <div style="position:relative;z-index:1">
+            <span class="ptag" style="background:var(--red);color:#fff"><span class="dot"></span>ÚLTIMAS ATUALIZAÇÕES</span>
+            <h3>O que acabou de ser publicado aparece primeiro.</h3>
+            <p>Um feed em ordem cronológica, para você acompanhar rapidamente o que há de novo na política brasileira.</p>
+          </div>
+          <div class="feed-lines" aria-hidden="true">
+            <div class="feed-line"><i>CÂMARA</i><span></span></div>
+            <div class="feed-line"><i>CONGRESSO</i><span class="s2"></span></div>
+            <div class="feed-line"><i>BRASIL</i><span class="s3"></span></div>
+          </div>
+        </div>
+        <div class="pcol">
+          <span class="ptag" style="background:rgba(0,184,92,.12);color:var(--green-deep)">INFORMAÇÕES PÚBLICAS</span>
+          <h3>Fontes indicadas</h3>
+          <p>Prioridade para fontes públicas e oficiais, com a indicação da origem de cada conteúdo.</p>
+        </div>
+        <div class="pcol">
+          <span class="ptag" style="background:rgba(11,52,184,.08);color:var(--blue)">NOTÍCIAS</span>
+          <h3>Por editorias</h3>
+          <p>Câmara, Congresso e Política Nacional separados para você ir direto ao que interessa.</p>
+        </div>
+        <div class="pcol wide">
+          <span class="ptag" style="background:rgba(255,212,0,.3);color:#6b5400">ALERTAS</span>
+          <h3>Você escolhe o que quer receber</h3>
+          <p>Ative as categorias que preferir e receba notificações apenas quando houver novas informações sobre elas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principles reveal d2">
+      <span class="principle"><svg><use href="#i-check"/></svg>Fonte indicada em cada conteúdo</span>
+      <span class="principle"><svg><use href="#i-check"/></svg>Organização por categorias</span>
+      <span class="principle"><svg><use href="#i-check"/></svg>Você no controle dos alertas</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Perguntas frequentes</span>
+      <h2 class="display">Tire suas dúvidas</h2>
+    </div>
+    <div class="faq-list">
+      <details class="reveal d1" open>
+        <summary><span class="qn">01</span>O que é o Brasil 22?<span class="qi"><svg><use href="#i-plus"/></svg></span></summary>
+        <div class="ans"><p>O Brasil 22 é uma plataforma para acompanhar notícias e informações relacionadas à política brasileira.</p></div>
+      </details>
+      <details class="reveal d2">
+        <summary><span class="qn">02</span>Como recebo as notícias?<span class="qi"><svg><use href="#i-plus"/></svg></span></summary>
+        <div class="ans"><p>Você pode ativar as notificações do aplicativo para receber alertas sobre novas atualizações.</p></div>
+      </details>
+      <details class="reveal d3">
+        <summary><span class="qn">03</span>Quais assuntos posso acompanhar?<span class="qi"><svg><use href="#i-plus"/></svg></span></summary>
+        <div class="ans"><p>Política nacional, Câmara dos Deputados, Congresso e outros assuntos relacionados ao cenário político brasileiro.</p></div>
+      </details>
+      <details class="reveal d4">
+        <summary><span class="qn">04</span>As informações são oficiais?<span class="qi"><svg><use href="#i-plus"/></svg></span></summary>
+        <div class="ans"><p>As informações são apresentadas com indicação de suas respectivas fontes, priorizando fontes públicas e oficiais quando disponíveis.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final" id="conhecer">
+  <div class="shape rhombus"></div>
+  <div class="shape circle"></div>
+  <div class="wrap final-in">
+    <span class="tag-live reveal"><span class="dot"></span>Notícias em tempo real</span>
+    <h2 class="display reveal d1">Acompanhe o Brasil <span class="y">mais de perto.</span></h2>
+    <p class="lead reveal d2">Tenha as principais atualizações políticas organizadas em um só lugar e receba novos acontecimentos diretamente no seu celular.</p>
+    <div class="reveal d3">
+      <a href="#video" class="btn btn-primary btn-pulse" data-cta>Quero conhecer o Brasil 22 <svg><use href="#i-arrow"/></svg></a>
+      <span class="micro"><svg><use href="#i-shield"/></svg>Informação para você acompanhar. A decisão é sempre sua.</span>
+    </div>
+  </div>
+  <div class="shape stripe"></div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo"><span class="logo-mark"><span class="logo-bar"></span><span class="logo-text"><b>BRASIL</b><strong>22</strong></span></span></span>
+        <p>Informação política em um só lugar.</p>
+      </div>
+      <nav class="footer-links" aria-label="Rodapé">
+        <a href="#" data-link="termos">Termos de Uso</a>
+        <a href="#" data-link="privacidade">Política de Privacidade</a>
+        <a href="#" data-link="contato">Contato</a>
+      </nav>
+    </div>
+    <p class="disclaimer"><svg><use href="#i-info"/></svg><span>O Brasil 22 é uma plataforma independente de acompanhamento de informações e notícias. Conteúdos devem ser apresentados com suas respectivas fontes.</span></p>
+    <div class="copy"><span>© <span id="year">2026</span> BRASIL 22</span><span>INFORMAÇÃO • POLÍTICA • BRASIL</span></div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — preencha antes de publicar
+   APP_URL:   link da loja / página de download do app.
+              Vazio = os botões levam até o vídeo de apresentação.
+   VIDEO_URL: URL de incorporação do vídeo (ex.: https://www.youtube.com/embed/ID).
+   LINKS:     páginas do rodapé.
+   ========================================================= */
+const APP_URL = '';
+const VIDEO_URL = '';
+const LINKS = { termos: '', privacidade: '', contato: '' };
+
+(function () {
+  // CTAs
+  if (APP_URL) {
+    document.querySelectorAll('[data-cta]').forEach(function (a) {
+      a.href = APP_URL; a.target = '_blank'; a.rel = 'noopener';
+    });
+  }
+  // Links do rodapé
+  document.querySelectorAll('[data-link]').forEach(function (a) {
+    var url = LINKS[a.dataset.link];
+    if (url) a.href = url;
+  });
+
+  // Header ao rolar
+  var header = document.getElementById('header');
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 20); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Menu móvel
+  var drawer = document.getElementById('drawer');
+  var openBtn = document.getElementById('menuOpen');
+  function setDrawer(open) {
+    drawer.classList.toggle('open', open);
+    drawer.setAttribute('aria-hidden', String(!open));
+    openBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  openBtn.addEventListener('click', function () { setDrawer(true); });
+  document.getElementById('menuClose').addEventListener('click', function () { setDrawer(false); });
+  drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setDrawer(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDrawer(false); });
+
+  // Relógio (horário de Brasília)
+  var clock = document.getElementById('clock');
+  var phoneClocks = document.querySelectorAll('.lock-clock');
+  var fmt = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+  function tick() {
+    var t = fmt.format(new Date());
+    clock.textContent = 'BRASÍLIA ' + t;
+    phoneClocks.forEach(function (el) { el.textContent = t.slice(0, 5); });
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Data do "portal"
+  var now = new Date();
+  var dl = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', weekday: 'long', day: '2-digit', month: 'long' }).format(now);
+  document.getElementById('dateline').textContent = dl.toUpperCase();
+  document.querySelector('.lock-time small').textContent = dl.split(',')[0];
+  document.getElementById('year').textContent = now.getFullYear();
+
+  // Player de vídeo
+  var player = document.getElementById('player');
+  player.addEventListener('click', function () {
+    if (VIDEO_URL) {
+      var src = VIDEO_URL + (VIDEO_URL.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
+      var f = document.createElement('iframe');
+      f.src = src; f.title = 'Vídeo de apresentação do Brasil 22';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      player.replaceWith(Object.assign(document.createElement('div'), { className: 'player' }));
+      document.querySelector('.player-frame .player').appendChild(f);
+    } else {
+      player.classList.add('noted');
+      setTimeout(function () { player.classList.remove('noted'); }, 3200);
+    }
+  });
+
+  // FAQ: um aberto por vez
+  var items = document.querySelectorAll('.faq details');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+
+  // Animações de entrada
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
