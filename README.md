@@ -14,5 +14,14 @@ No topo do `<script>` no fim do `index.html`:
 ## Arquivos
 
 - `assets/fundo-hero.jpg` — fundo da primeira dobra
-- `assets/foto-destaque.jpg` — foto do painel da primeira dobra
+- `assets/foto-destaque.png` — imagem do painel da primeira dobra
 - `assets/video.mp4` — vídeo da seção "Entenda o que está acontecendo no Brasil"
+
+## Oferta
+
+Seção `#oferta`: App Brasil 22 completo por R$ 12,90 e três adicionais (order bumps) de R$ 5,90 cada:
+`figurinhas`, `artes_pt` e `foto_mito`. O total é calculado na página.
+
+**Pendente:** ligar o botão ao checkout PIX da ZuckPay na função `abrirCheckout(adicionais, total)`.
+O valor cobrado precisa ser calculado no servidor a partir dos ids — nunca confie no total enviado pelo navegador.
+Checkout com PHP exige hospedagem com PHP (GitHub Pages e Vercel estático não executam PHP).
