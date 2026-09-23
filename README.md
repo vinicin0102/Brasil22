@@ -22,25 +22,38 @@ No topo do `<script>` no fim do `index.html`:
 Seção `#oferta`: App Brasil 22 completo por **R$ 12,90** e três adicionais (order bumps) de **R$ 5,90**:
 `figurinhas`, `artes_pt` e `foto_mito`. O botão abre o checkout PIX da ZuckPay com os itens marcados.
 
-## Checkout PIX (ZuckPay)
+## Checkout PIX (ZuckPay) — funções da Vercel
 
 ```
-api/pix.php              cria a cobrança PIX (produto + adicionais)
-api/status.php           consulta o status do pagamento
-api/webhook.php          recebe a notificação da ZuckPay
-api/diagnostico.php      checagem da integração (protegido por token)
-api/_bootstrap.php       validação, CORS e chamada autenticada à API
-api/config.example.php   modelo de configuração
-tools/testar-webhook.php testa a validação de assinatura do webhook (CLI)
+api/pix.js          cria a cobrança PIX (produto + adicionais)
+api/status.js       consulta o status do pagamento
+api/webhook.js      recebe a notificação da ZuckPay
+api/diagnostico.js  checagem da integração (protegido por token)
+api/_zuckpay.js     preços, validação e chamada autenticada à API
 ```
 
-1. Requer hospedagem com **PHP 8+ e cURL** (GitHub Pages e Vercel estático não rodam PHP).
-2. `cp api/config.example.php api/config.php` e preencha `client_id`, `client_secret`,
-   `webhook_url`, `webhook_secret` e `allowed_origins`. `config.php` está no `.gitignore` — nunca versione.
-3. Preços ficam em `config.php` (`planos.app` e `adicionais`). O navegador envia só os ids;
-   qualquer valor vindo da página é ignorado. Se mudar preço, mude também os valores exibidos no `index.html`.
-4. Se o PIX não gerar, defina `debug_token` e abra `/api/diagnostico.php?token=SEU_TOKEN`.
-5. Depois de configurar o `webhook_secret`, rode `php tools/testar-webhook.php` no servidor.
+A Vercel não executa PHP, por isso o checkout roda como funções Node na pasta `api/`.
+Configure em **Vercel > Settings > Environment Variables** (Production):
 
-**Pendente:** entrega do produto. `api/webhook.php` tem um `TODO` no ponto onde entra a liberação do
-app e o envio dos adicionais; roda uma única vez por pagamento.
+| Variável | Obrigatória | Para quê |
+|---|---|---|
+| `client_id` | sim | Client ID da ZuckPay |
+| `client_secret` | sim | Client Secret da ZuckPay |
+| `ZUCKPAY_WEBHOOK_SECRET` | recomendado | valida a assinatura dos postbacks |
+| `ZUCKPAY_API_BASE` | não | padrão `https://www.zuckpay.com.br/conta/v3/pix` |
+| `ZUCKPAY_WEBHOOK_URL` | não | padrão `https://<domínio>/api/webhook` |
+| `ZUCKPAY_PRODUCT_ID` | não | vincula a venda ao produto no painel |
+| `ZUCKPAY_DEBUG_TOKEN` | não | libera `/api/diagnostico?token=...` — remova depois |
+
+Depois de mudar variáveis, faça **Redeploy** para valerem.
+
+- Preços ficam em `api/_zuckpay.js` (`PLANOS` e `ADICIONAIS`). O navegador envia só os ids;
+  qualquer valor vindo da página é ignorado. Se mudar preço, mude também os valores exibidos no `index.html`.
+- Cadastre `https://<seu-domínio>/api/webhook` em Integrações > Webhooks no painel da ZuckPay.
+- **IP Whitelist:** a Vercel não tem IP fixo. Se a whitelist da ZuckPay estiver ativa, o PIX é recusado (403).
+- Se o PIX não gerar, crie `ZUCKPAY_DEBUG_TOKEN`, faça redeploy e abra `/api/diagnostico?token=SEU_TOKEN`.
+- Erros aparecem em Vercel > Logs, com o prefixo `[zuckpay]`.
+
+**Pendente:** entrega do produto. `api/webhook.js` tem um `TODO` no ponto onde entra a liberação do
+app e o envio dos adicionais. Como a Vercel não tem disco persistente, use um banco (Vercel KV / Upstash)
+para garantir que cada pagamento seja entregue uma única vez.

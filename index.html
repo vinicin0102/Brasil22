@@ -1197,7 +1197,7 @@ const LINKS = { termos: '', privacidade: '', contato: '' };
    os valores abaixo servem só para exibir o total na página. */
 const PRODUTO = { id: 'app', nome: 'App Brasil 22 completo', preco: 12.90 };
 
-/* Caminho dos endpoints PHP do checkout. Ajuste se a pasta api/ não estiver na raiz do site. */
+/* Caminho das funções do checkout (pasta api/, rodando na Vercel). */
 const API = '/api';
 
 (function () {
@@ -1392,7 +1392,7 @@ const API = '/api';
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     limparErros(); carregando(true);
-    fetch(API + '/pix.php', {
+    fetch(API + '/pix', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1441,7 +1441,7 @@ const API = '/api';
     poll = setTimeout(function () { verificar(dados); }, segundos * 1000);
   }
   function verificar(dados) {
-    fetch(API + '/status.php?transactionId=' + encodeURIComponent(dados.transactionId))
+    fetch(API + '/status?transactionId=' + encodeURIComponent(dados.transactionId))
       .then(function (r) { return r.json().then(function (s) { return [r.ok, s]; }); })
       .then(function (res) {
         var ok = res[0], s = res[1];
