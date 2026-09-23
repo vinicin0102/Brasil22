@@ -115,7 +115,9 @@ button{font:inherit;cursor:pointer}
   radial-gradient(900px 600px at 85% 20%,rgba(0,184,92,.28),transparent 60%),
   radial-gradient(700px 500px at 10% 90%,rgba(11,52,184,.55),transparent 60%),
   radial-gradient(500px 400px at 60% 110%,rgba(255,212,0,.16),transparent 60%),
-  linear-gradient(160deg,#061a5a 0%,var(--blue-deep) 45%,var(--blue-night) 100%);
+  linear-gradient(90deg,rgba(2,10,38,.94) 0%,rgba(4,20,67,.86) 45%,rgba(4,20,67,.6) 100%),
+  url("assets/fundo-hero.jpg") center/cover no-repeat,
+  var(--blue-deep);
   padding:calc(var(--header-h) + 76px) 0 110px}
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 40%,transparent 100%);pointer-events:none}
 .hero-scan{position:absolute;left:0;right:0;height:180px;background:linear-gradient(180deg,transparent,rgba(25,242,138,.06),transparent);animation:scan 7s linear infinite;pointer-events:none}
@@ -134,6 +136,11 @@ button{font:inherit;cursor:pointer}
 .panel-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
 .panel-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;font-weight:700;color:rgba(255,255,255,.75)}
 .panel-clock{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--yellow);display:flex;gap:8px;align-items:center}
+.panel-photo{position:relative;margin:0 0 6px;border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:var(--blue-night);border:1px solid rgba(255,255,255,.12)}
+.panel-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.panel-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(2,10,38,.75))}
+.panel-photo .tag-live{position:absolute;left:12px;top:12px;z-index:1;font-size:.66rem;padding:6px 10px;box-shadow:none}
+.panel-photo .dot{width:7px;height:7px}
 .panel-row{display:flex;align-items:center;gap:14px;padding:14px;border-radius:16px;background:rgba(2,10,38,.35);border:1px solid rgba(255,255,255,.06);margin-top:10px}
 .panel-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none}
 .panel-ico svg{width:22px;height:22px}
@@ -192,11 +199,13 @@ button{font:inherit;cursor:pointer}
 @keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
 .play svg{width:38%;height:38%;color:var(--ink);margin-left:8%}
 .player:hover .play{transform:translate(-50%,-50%) scale(1.07)}
-.lower-third{position:absolute;left:22px;right:22px;bottom:22px;display:flex;align-items:stretch;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
-.lower-third .lt-a{background:var(--green);padding:12px 16px;font-weight:900;font-stretch:86%;letter-spacing:.05em;font-size:clamp(.72rem,1.4vw,.95rem);text-transform:uppercase;display:flex;align-items:center;gap:8px;white-space:nowrap}
-.lower-third .lt-b{flex:1;background:rgba(255,255,255,.95);color:var(--ink);padding:12px 16px;font-weight:800;font-size:clamp(.72rem,1.4vw,.95rem);display:flex;align-items:center;min-width:0}
-.lower-third .lt-b span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lower-third .lt-c{background:var(--yellow);color:var(--ink);padding:12px 14px;font-family:var(--mono);font-weight:700;font-size:.75rem;display:flex;align-items:center}
+.player video{position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain}
+.msg-bar{max-width:1040px;margin:26px auto 0;display:flex;align-items:stretch;border-radius:16px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(4,20,67,.55)}
+.msg-bar .mb-tag{background:var(--green);color:#fff;padding:18px 20px;font-weight:900;font-stretch:86%;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.msg-bar .mb-text{flex:1;background:var(--blue-deep);color:#fff;padding:18px 22px;font-weight:900;font-stretch:84%;text-transform:uppercase;font-size:clamp(1.05rem,2.3vw,1.6rem);line-height:1.1;display:flex;align-items:center}
+.msg-bar .mb-arrow{background:var(--yellow);color:var(--ink);width:78px;flex:none;display:grid;place-items:center}
+.msg-bar .mb-arrow svg{width:34px;height:34px;animation:up 1.4s ease-in-out infinite}
+@keyframes up{0%,100%{transform:translateY(4px)}50%{transform:translateY(-6px)}}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .player-note{position:absolute;inset:auto 0 50% 0;transform:translateY(calc(50% + 90px));text-align:center;font-family:var(--mono);font-size:.8rem;color:rgba(255,255,255,.85);opacity:0;transition:opacity .3s}
 .player.noted .player-note{opacity:1}
@@ -469,9 +478,11 @@ button{font:inherit;cursor:pointer}
   .player{border-radius:19px}
   .player-tag{top:12px;left:12px}
   .player-tag .hd{display:none}
-  .lower-third{left:10px;right:10px;bottom:10px;border-radius:8px}
-  .lower-third .lt-a,.lower-third .lt-b{padding:8px 10px}
-  .lower-third .lt-c{display:none}
+  .msg-bar{flex-wrap:wrap;margin-top:18px}
+  .msg-bar .mb-tag{padding:10px 14px;font-size:.85rem}
+  .msg-bar .mb-text{order:3;flex-basis:100%;padding:16px}
+  .msg-bar .mb-arrow{flex:1;width:auto;padding:6px 0}
+  .msg-bar .mb-arrow svg{width:26px;height:26px}
   .cards{grid-template-columns:1fr;gap:16px}
   .steps{grid-template-columns:1fr;gap:48px}
   .steps::before{display:none}
@@ -509,6 +520,7 @@ button{font:inherit;cursor:pointer}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" d="M12 20V4M5 11l7-7 7 7"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.52.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5Z"/></symbol>
     <symbol id="i-bell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
     <symbol id="i-building" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 10h16M12 3 3 8v2h18V8l-9-5ZM6 10v8M10 10v8M14 10v8M18 10v8M4 18h16"/></symbol>
@@ -595,6 +607,10 @@ button{font:inherit;cursor:pointer}
         <span class="panel-title">BRASIL 22 · PAINEL</span>
         <span class="panel-clock"><span class="dot dot-red"></span><span id="clock">BRASÍLIA --:--:--</span></span>
       </div>
+      <figure class="panel-photo">
+        <img src="assets/foto-destaque.jpg" alt="" width="1000" height="582" loading="eager">
+        <span class="tag-live"><span class="dot"></span>Agora</span>
+      </figure>
       <div class="panel-row">
         <div class="panel-ico" style="background:rgba(0,184,92,.2);color:var(--green-neon)"><svg><use href="#i-building"/></svg></div>
         <div class="grow"><h4>Câmara dos Deputados</h4><p>Votações, projetos e pautas</p></div>
@@ -667,12 +683,12 @@ button{font:inherit;cursor:pointer}
         <span class="player-tag"><span class="assista"><svg><use href="#i-play"/></svg>ASSISTA</span><span class="hd">HD</span></span>
         <span class="play"><svg><use href="#i-play"/></svg></span>
         <span class="player-note" id="playerNote">O vídeo de apresentação será publicado em breve.</span>
-        <span class="lower-third">
-          <span class="lt-a"><span class="dot"></span>Brasil 22</span>
-          <span class="lt-b"><span>Como funciona o aplicativo de notícias políticas</span></span>
-          <span class="lt-c">VÍDEO</span>
-        </span>
       </button>
+    </div>
+    <div class="msg-bar reveal d2">
+      <span class="mb-tag"><span class="dot"></span>Brasil 22</span>
+      <span class="mb-text">Até quando você vai aceitar alguém assim governar nosso país?</span>
+      <span class="mb-arrow" aria-hidden="true"><svg><use href="#i-up"/></svg></span>
     </div>
     <p class="video-caption reveal d2">Veja como funciona o Brasil 22 e como você pode receber as principais atualizações diretamente no celular.</p>
   </div>
@@ -990,7 +1006,7 @@ button{font:inherit;cursor:pointer}
    LINKS:     páginas do rodapé.
    ========================================================= */
 const APP_URL = '';
-const VIDEO_URL = '';
+const VIDEO_URL = 'assets/video.mp4';
 const LINKS = { termos: '', privacidade: '', contato: '' };
 
 (function () {
@@ -1047,7 +1063,14 @@ const LINKS = { termos: '', privacidade: '', contato: '' };
   // Player de vídeo
   var player = document.getElementById('player');
   player.addEventListener('click', function () {
-    if (VIDEO_URL) {
+    if (/\.(mp4|webm|mov)(\?|$)/i.test(VIDEO_URL)) {
+      var v = document.createElement('video');
+      v.src = VIDEO_URL; v.controls = true; v.autoplay = true; v.playsInline = true;
+      var box = Object.assign(document.createElement('div'), { className: 'player' });
+      box.appendChild(v);
+      player.replaceWith(box);
+      v.play().catch(function () {});
+    } else if (VIDEO_URL) {
       var src = VIDEO_URL + (VIDEO_URL.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
       var f = document.createElement('iframe');
       f.src = src; f.title = 'Vídeo de apresentação do Brasil 22';
