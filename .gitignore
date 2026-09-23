@@ -1,2 +1,6 @@
 .DS_Store
 Thumbs.db
+
+# credenciais — nunca versionar
+api/config.php
+storage/

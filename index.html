@@ -435,8 +435,50 @@ button{font:inherit;cursor:pointer}
 .total .btn{width:100%;white-space:normal;text-align:center}
 .total small{text-align:center;color:var(--muted);font-size:.82rem;display:flex;gap:8px;justify-content:center;align-items:center}
 .total small svg{width:16px;height:16px;color:var(--green)}
-.checkout-msg{display:none;text-align:center;font-weight:700;font-size:.9rem;color:var(--red)}
-.checkout-msg.show{display:block}
+
+/* ---------- Checkout ---------- */
+.co{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,10,38,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.co.open{display:flex}
+.co-box{width:100%;max-width:460px;max-height:92vh;overflow-y:auto;background:#fff;color:var(--text);border-radius:24px;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+.co-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 22px 16px;border-bottom:1px solid var(--line);position:relative}
+.co-head::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;border-radius:24px 24px 0 0;background:linear-gradient(90deg,var(--green) 0 50%,var(--yellow) 50%)}
+.co-head h3{margin:0;font-weight:900;font-stretch:84%;text-transform:uppercase;font-size:1.45rem}
+.co-head p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
+.co-head p strong{color:var(--blue-deep)}
+.co-x{border:0;background:var(--paper);width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;color:var(--text)}
+.co-x svg{width:18px;height:18px}
+.co-body{padding:20px 22px 24px}
+.co-itens{list-style:none;margin:0 0 18px;padding:12px 14px;border-radius:14px;background:var(--paper);font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+.co-itens li{display:flex;justify-content:space-between;gap:10px}
+.co-itens li b{white-space:nowrap}
+.co-itens li.tot{border-top:1px dashed #C9D1E1;padding-top:8px;margin-top:2px;font-weight:900;font-size:1rem}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-weight:800;font-size:.86rem;margin-bottom:5px}
+.fld input{width:100%;font:inherit;font-size:1rem;padding:13px 14px;border-radius:12px;border:1.5px solid #CCD3E0;outline:none;transition:border-color .2s,box-shadow .2s}
+.fld input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,184,92,.15)}
+.fld .hint{font-size:.76rem;color:var(--muted);margin:4px 0 0}
+.fld .err{font-size:.78rem;color:var(--red);margin:4px 0 0;display:none}
+.fld .err.show{display:block}
+.co-erro{display:none;font-size:.88rem;color:var(--red);background:rgba(229,22,46,.07);border:1px solid rgba(229,22,46,.25);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.co-erro.show{display:block}
+.co .btn{width:100%;white-space:normal}
+.co .btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+.spin{width:18px;height:18px;border-radius:50%;border:2.5px solid currentColor;border-right-color:transparent;animation:rot .8s linear infinite;display:none}
+.loading .spin{display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.co-note{font-size:.74rem;color:var(--muted);text-align:center;margin:10px 0 0}
+.co-pix{text-align:center}
+.co-pix img{width:210px;height:210px;margin:6px auto 14px;border-radius:14px;border:1px solid var(--line);object-fit:contain;background:#fff}
+.co-pix textarea{width:100%;font-family:var(--mono);font-size:.72rem;padding:10px;border-radius:12px;border:1px solid #CCD3E0;background:var(--paper);resize:none}
+.co-pix .btn{margin-top:8px}
+.co-wait{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-weight:700;font-size:.9rem;color:var(--muted)}
+.co-wait .spin{display:inline-block;color:var(--green)}
+.co-ok{text-align:center;padding:10px 0}
+.co-ok .ic{width:70px;height:70px;border-radius:50%;background:rgba(0,184,92,.14);color:var(--green);display:grid;place-items:center;margin:0 auto 14px}
+.co-ok .ic svg{width:36px;height:36px}
+.co-ok h4{margin:0 0 8px;font-weight:900;font-stretch:84%;text-transform:uppercase;font-size:1.6rem}
+.co-ok p{margin:0;color:var(--muted)}
+[hidden]{display:none!important}
 
 /* ---------- FAQ ---------- */
 .faq{background:var(--paper)}
@@ -1029,7 +1071,6 @@ button{font:inherit;cursor:pointer}
         <div class="total">
           <div class="total-row"><span>TOTAL DO PEDIDO</span><b id="totalPedido">R$ 12,90</b></div>
           <button type="button" class="btn btn-green btn-pulse" id="comprar">Quero o Brasil 22 completo <svg><use href="#i-arrow"/></svg></button>
-          <p class="checkout-msg" id="checkoutMsg">Pagamento em configuração. Tente novamente em instantes.</p>
           <small><svg><use href="#i-shield"/></svg>Pagamento seguro via PIX · confirmação automática</small>
         </div>
       </div>
@@ -1083,6 +1124,43 @@ button{font:inherit;cursor:pointer}
 
 </main>
 
+<!-- ============ CHECKOUT PIX (ZuckPay) ============ -->
+<div class="co" id="co" role="dialog" aria-modal="true" aria-labelledby="co-titulo">
+  <div class="co-box">
+    <div class="co-head">
+      <div><h3 id="co-titulo">Finalizar pedido</h3><p>Pagamento via PIX · <strong id="co-total">R$ 12,90</strong></p></div>
+      <button type="button" class="co-x" id="co-fechar" aria-label="Fechar"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="co-body">
+      <form id="co-form" novalidate>
+        <ul class="co-itens" id="co-itens"></ul>
+        <div class="fld"><label for="cp-nome">Nome completo</label><input id="cp-nome" type="text" autocomplete="name" required><p class="err" data-erro="nome"></p></div>
+        <div class="fld"><label for="cp-cpf">CPF</label><input id="cp-cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" required><p class="err" data-erro="cpf"></p></div>
+        <div class="fld"><label for="cp-email">E-mail</label><input id="cp-email" type="email" autocomplete="email" required><p class="hint">É neste e-mail que você recebe o acesso.</p><p class="err" data-erro="email"></p></div>
+        <div class="fld"><label for="cp-telefone">Celular (com DDD)</label><input id="cp-telefone" type="tel" inputmode="numeric" placeholder="(11) 99999-8888" required><p class="err" data-erro="telefone"></p></div>
+        <p class="co-erro" id="co-erro"></p>
+        <button type="submit" class="btn btn-green" id="co-enviar"><span class="js-label">Gerar PIX</span><span class="spin"></span></button>
+        <p class="co-note">Seus dados são usados apenas para emitir a cobrança e liberar o acesso.</p>
+      </form>
+
+      <div class="co-pix" id="co-pix" hidden>
+        <p style="margin:0 0 6px;color:var(--muted);font-size:.92rem">Abra o app do seu banco e pague com <strong>PIX Copia e Cola</strong> ou pelo QR Code.</p>
+        <img id="pix-imagem" alt="QR Code do PIX">
+        <textarea id="pix-codigo" rows="3" readonly aria-label="Código PIX copia e cola"></textarea>
+        <button type="button" class="btn btn-primary" id="pix-copiar"><span>Copiar código PIX</span></button>
+        <div class="co-wait"><span class="spin"></span>Aguardando pagamento… <span id="pix-timer" style="font-family:var(--mono)"></span></div>
+        <p class="co-note">A confirmação é automática. Pode deixar esta janela aberta.</p>
+      </div>
+
+      <div class="co-ok" id="co-ok" hidden>
+        <div class="ic"><svg><use href="#i-check"/></svg></div>
+        <h4>Pagamento confirmado!</h4>
+        <p>Enviamos o acesso para <strong id="pago-email"></strong>. Se não encontrar, confira a caixa de spam.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="wrap">
@@ -1119,12 +1197,8 @@ const LINKS = { termos: '', privacidade: '', contato: '' };
    os valores abaixo servem só para exibir o total na página. */
 const PRODUTO = { id: 'app', nome: 'App Brasil 22 completo', preco: 12.90 };
 
-/* Chamado ao clicar em "Quero o Brasil 22 completo".
-   Recebe os ids dos adicionais marcados (ex.: ['figurinhas','foto_mito']).
-   TODO: ligar ao checkout PIX da ZuckPay. */
-function abrirCheckout(adicionais, total) {
-  document.getElementById('checkoutMsg').classList.add('show');
-}
+/* Caminho dos endpoints PHP do checkout. Ajuste se a pasta api/ não estiver na raiz do site. */
+const API = '/api';
 
 (function () {
   // CTAs
@@ -1203,8 +1277,8 @@ function abrirCheckout(adicionais, total) {
   totalEl.textContent = brl.format(calcularTotal());
   document.getElementById('comprar').addEventListener('click', function () {
     var marcados = [];
-    bumps.forEach(function (b) { if (b.checked) marcados.push(b.value); });
-    abrirCheckout(marcados, calcularTotal());
+    bumps.forEach(function (b) { if (b.checked) marcados.push({ id: b.value, nome: b.closest('.bump').querySelector('.bt b').textContent, preco: parseFloat(b.dataset.preco) }); });
+    window.abrirCheckout(marcados, calcularTotal());
   });
 
   // FAQ: um aberto por vez
@@ -1222,6 +1296,174 @@ function abrirCheckout(adicionais, total) {
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(function (el) { io.observe(el); });
+})();
+
+/* =========================================================
+   CHECKOUT PIX VIA ZUCKPAY
+   O navegador envia só os ids (produto e adicionais); o valor
+   cobrado é calculado no servidor (api/pix.php + config.php).
+   ========================================================= */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var modal = $('co'), form = $('co-form'), telaPix = $('co-pix'), telaOk = $('co-ok');
+  var enviar = $('co-enviar'), erroGeral = $('co-erro');
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  var adicionais = [], pedido = null, poll = null, contagem = null;
+
+  function lerCookie(nome) {
+    var achado = document.cookie.split('; ').find(function (c) { return c.indexOf(nome + '=') === 0; });
+    return achado ? decodeURIComponent(achado.split('=').slice(1).join('=')) : '';
+  }
+  function rastreio() {
+    var url = new URLSearchParams(location.search), dados = {};
+    ['utm_source','utm_campaign','utm_medium','utm_content','utm_term','gclid','ttclid','click_id']
+      .forEach(function (k) { var v = url.get(k); if (v) dados[k] = v; });
+    var fbc = lerCookie('_fbc'); if (fbc) dados.fbc = fbc;
+    var fbp = lerCookie('_fbp'); if (fbp) dados.fbp = fbp;
+    return dados;
+  }
+
+  function mascararCpf(v) {
+    return v.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  }
+  function mascararTelefone(v) {
+    var d = v.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 10) return d.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2');
+    return d.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2');
+  }
+  $('cp-cpf').addEventListener('input', function (e) { e.target.value = mascararCpf(e.target.value); });
+  $('cp-telefone').addEventListener('input', function (e) { e.target.value = mascararTelefone(e.target.value); });
+
+  function etapa(qual) {
+    form.hidden = qual !== 'form'; telaPix.hidden = qual !== 'pix'; telaOk.hidden = qual !== 'ok';
+  }
+
+  window.abrirCheckout = function (itens, total) {
+    adicionais = itens;
+    // Um id por abertura: reenviar o formulário devolve a mesma cobrança.
+    pedido = (window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)).replace(/[^a-zA-Z0-9-]/g, '');
+    var lista = $('co-itens');
+    lista.innerHTML = '';
+    function linha(nome, valor, cls) {
+      var li = document.createElement('li'); if (cls) li.className = cls;
+      var a = document.createElement('span'); a.textContent = nome;
+      var b = document.createElement('b'); b.textContent = brl.format(valor);
+      li.appendChild(a); li.appendChild(b); lista.appendChild(li);
+    }
+    linha(PRODUTO.nome, PRODUTO.preco);
+    itens.forEach(function (i) { linha(i.nome, i.preco); });
+    linha('Total', total, 'tot');
+    $('co-total').textContent = brl.format(total);
+    limparErros(); etapa('form');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { $('cp-nome').focus(); }, 50);
+    if (window.fbq) fbq('track', 'InitiateCheckout', { value: total, currency: 'BRL' });
+  };
+
+  function fechar() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    clearTimeout(poll); clearInterval(contagem);
+  }
+  $('co-fechar').addEventListener('click', fechar);
+  modal.addEventListener('click', function (e) { if (e.target === modal) fechar(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) fechar(); });
+
+  function limparErros() {
+    document.querySelectorAll('[data-erro]').forEach(function (p) { p.classList.remove('show'); p.textContent = ''; });
+    erroGeral.classList.remove('show'); erroGeral.textContent = '';
+  }
+  function mostrarErros(campos, geral) {
+    limparErros();
+    Object.keys(campos || {}).forEach(function (c) {
+      var p = document.querySelector('[data-erro="' + c + '"]');
+      if (p) { p.textContent = campos[c]; p.classList.add('show'); }
+    });
+    if (geral) { erroGeral.textContent = geral; erroGeral.classList.add('show'); }
+  }
+  function carregando(sim) {
+    enviar.disabled = sim;
+    enviar.classList.toggle('loading', sim);
+    enviar.querySelector('.js-label').textContent = sim ? 'Gerando…' : 'Gerar PIX';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    limparErros(); carregando(true);
+    fetch(API + '/pix.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        plano: PRODUTO.id,
+        adicionais: adicionais.map(function (i) { return i.id; }),
+        pedido: pedido,
+        nome: $('cp-nome').value,
+        cpf: $('cp-cpf').value,
+        email: $('cp-email').value,
+        telefone: $('cp-telefone').value,
+        rastreio: rastreio()
+      })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (dados) {
+        if (!r.ok) {
+          if (dados.debug) console.error('[zuckpay] detalhe do erro:', dados.debug);
+          var msg = (dados.erro || 'Não foi possível gerar o PIX.') + (dados.ref ? ' (código ' + dados.ref + ')' : '');
+          mostrarErros(dados.campos, dados.campos ? null : msg);
+          return;
+        }
+        exibirPix(dados);
+      });
+    }).catch(function () {
+      mostrarErros(null, 'Falha de conexão. Verifique sua internet e tente de novo.');
+    }).then(function () { carregando(false); });
+  });
+
+  function exibirPix(dados) {
+    $('pix-codigo').value = dados.qrcode || '';
+    var img = $('pix-imagem');
+    if (dados.qrcode_image) { img.src = dados.qrcode_image; img.hidden = false; } else { img.hidden = true; }
+    etapa('pix');
+    var restante = dados.expiracao || 1200, relogio = $('pix-timer');
+    clearInterval(contagem);
+    contagem = setInterval(function () {
+      restante--;
+      if (restante <= 0) { clearInterval(contagem); clearTimeout(poll); relogio.textContent = '(expirado)'; return; }
+      relogio.textContent = '(' + String(Math.floor(restante / 60)).padStart(2, '0') + ':' + String(restante % 60).padStart(2, '0') + ')';
+    }, 1000);
+    agendar(dados, 5);
+  }
+
+  // Usa o intervalo que o servidor sugere (sobe para 30s no rate limit da ZuckPay).
+  function agendar(dados, segundos) {
+    clearTimeout(poll);
+    poll = setTimeout(function () { verificar(dados); }, segundos * 1000);
+  }
+  function verificar(dados) {
+    fetch(API + '/status.php?transactionId=' + encodeURIComponent(dados.transactionId))
+      .then(function (r) { return r.json().then(function (s) { return [r.ok, s]; }); })
+      .then(function (res) {
+        var ok = res[0], s = res[1];
+        if (ok && s.pago) {
+          clearTimeout(poll); clearInterval(contagem);
+          $('pago-email').textContent = $('cp-email').value;
+          etapa('ok');
+          if (window.fbq) fbq('track', 'Purchase', { value: dados.valor, currency: 'BRL' });
+          return;
+        }
+        if (ok && s.final) { clearTimeout(poll); clearInterval(contagem); return; }
+        agendar(dados, (ok && s.proxima_consulta) || 8);
+      })
+      .catch(function () { agendar(dados, 8); });
+  }
+
+  $('pix-copiar').addEventListener('click', function () {
+    var campo = $('pix-codigo'), rotulo = this.querySelector('span');
+    (navigator.clipboard ? navigator.clipboard.writeText(campo.value) : Promise.reject())
+      .catch(function () { campo.select(); document.execCommand('copy'); })
+      .then(function () { rotulo.textContent = 'Copiado!'; setTimeout(function () { rotulo.textContent = 'Copiar código PIX'; }, 2000); });
+  });
 })();
 </script>
 </body>
